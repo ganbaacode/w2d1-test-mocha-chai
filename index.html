@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    
+  <!-- add mocha css, to show results -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.css">
+  <!-- add mocha framework code -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.js"></script>
+  <script>
+    mocha.setup('bdd'); // minimal setup
+  </script>
+  <!-- add chai -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/3.5.0/chai.js"></script>
+  <script>
+    // chai has a lot of stuff, let's make assert global
+    let assert = chai.assert;
+  </script>
+</head>
+
+<body>
+
+  <script>
+    function sum(x) {
+        return x.reduce((a,b)=>a+b,0);
+    }
+
+    function multiply(x){
+        return x.reduce((a,b)=>a*b,1);
+    }
+
+    function reverse(x){
+        return [...x].reverse().join("");
+    }
+
+    function filterLongWords(x,y){
+        var newArr = x.filter(a=>{ return a.length>y});
+        return newArr;
+    }
+
+    describe("Sum",function(){
+        it("sum every member of the array and return total sum", function(){
+            assert.equal(sum([1,2,3]),6);
+        });
+    });
+
+    describe("Multiply",function(){
+        it("This function multiplies all members of an array", function(){
+            assert.equal(multiply([2,2,2]),8);
+        });
+    });
+
+    describe("Reverse",function(){
+        it("This function reverse position of the string character", function(){
+            assert.equal(reverse("eden"),"nede");
+        });
+    });
+
+    describe("Long Word Filter",function(){
+        it("This function filters string array element length", function(){
+            //expect(filterLongWords(["eden","banana","ha","x"],2)).to.be.equalTo(["eden","banana"]);
+           assert.deepEqual(filterLongWords(["eden","banana","ha","x"],2),[ "eden" , "banana" ]);
+        });
+    })
+
+
+  </script>
+
+  <!-- the script with tests (describe, it...) -->
+  <script src="test.js"></script>
+
+  <!-- the element with id="mocha" will contain test results -->
+  <div id="mocha"></div>
+
+  <!-- run tests! -->
+  <script>
+    mocha.run();
+  </script>
+</body>
+
+</html>
